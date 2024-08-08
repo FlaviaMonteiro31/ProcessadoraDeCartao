@@ -1,0 +1,14 @@
+com\example\ms_clientes\model\records\ClienteResponse.class
+com\example\ms_clientes\repository\IClienteRepository.class
+com\example\ms_clientes\MsClientesApplication.class
+com\example\ms_clientes\controller\ClienteController.class
+com\example\ms_clientes\model\records\UsuarioResponse.class
+com\example\ms_clientes\exception\ClienteException.class
+com\example\ms_clientes\model\records\ClienteRequest.class
+com\example\ms_clientes\exception\GlobalExceptionHandler$ErrorResponse.class
+com\example\ms_clientes\exception\GlobalExceptionHandler.class
+com\example\ms_clientes\service\ClienteService.class
+com\example\ms_clientes\security\WebSecurityConfig.class
+com\example\ms_clientes\model\Cliente.class
+com\example\ms_clientes\security\JwtAuthenticationFilter.class
+com\example\ms_clientes\client\MsUsuarioClient.class

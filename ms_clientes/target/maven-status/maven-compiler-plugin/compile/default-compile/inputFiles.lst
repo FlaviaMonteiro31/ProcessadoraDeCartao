@@ -1,0 +1,13 @@
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\model\Cliente.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\exception\GlobalExceptionHandler.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\MsClientesApplication.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\service\ClienteService.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\model\records\ClienteRequest.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\security\WebSecurityConfig.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\client\MsUsuarioClient.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\repository\IClienteRepository.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\model\records\ClienteResponse.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\security\JwtAuthenticationFilter.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\exception\ClienteException.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\model\records\UsuarioResponse.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_clientes\src\main\java\com\example\ms_clientes\controller\ClienteController.java
