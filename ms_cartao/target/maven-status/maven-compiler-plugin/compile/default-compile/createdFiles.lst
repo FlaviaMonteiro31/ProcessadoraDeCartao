@@ -1,0 +1,17 @@
+com\example\ms_cartao\model\records\ClienteResponse.class
+com\example\ms_cartao\model\records\CartaoRequest.class
+com\example\ms_cartao\service\CartaoService.class
+com\example\ms_cartao\model\records\UsuarioResponse.class
+com\example\ms_cartao\exception\ExceptionHandler$ErrorResponse.class
+com\example\ms_cartao\exception\CartaoException.class
+com\example\ms_cartao\model\records\CartaoResponse.class
+com\example\ms_cartao\client\MsClientesClient.class
+com\example\ms_cartao\repository\ICartaoRepository.class
+com\example\ms_cartao\controller\CartaoController.class
+com\example\ms_cartao\exception\ExceptionHandler.class
+com\example\ms_cartao\MsCartaoApplication.class
+com\example\ms_cartao\client\MsUsuarioClient.class
+com\example\ms_cartao\exception\LimiteCartaoException.class
+com\example\ms_cartao\security\WebSecurityConfig.class
+com\example\ms_cartao\model\Cartao.class
+com\example\ms_cartao\security\JwtAuthenticationFilter.class

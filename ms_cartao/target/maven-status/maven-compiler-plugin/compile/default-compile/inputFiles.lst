@@ -1,0 +1,16 @@
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\model\records\CartaoResponse.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\security\WebSecurityConfig.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\service\CartaoService.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\client\MsUsuarioClient.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\model\Cartao.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\repository\ICartaoRepository.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\MsCartaoApplication.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\controller\CartaoController.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\model\records\UsuarioResponse.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\model\records\CartaoRequest.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\exception\LimiteCartaoException.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\exception\ExceptionHandler.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\exception\CartaoException.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\client\MsClientesClient.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\security\JwtAuthenticationFilter.java
+C:\git\ms_fluxosCartao\ms_fluxosCartao\ms_cartao\src\main\java\com\example\ms_cartao\model\records\ClienteResponse.java
