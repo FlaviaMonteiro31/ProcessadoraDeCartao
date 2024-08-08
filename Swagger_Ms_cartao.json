@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8082",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/cartao": {
+      "post": {
+        "tags": [
+          "cartao-controller"
+        ],
+        "description": "Solicitação para gerar cartão",
+        "operationId": "solicitaCartao",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartaoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso ao gerar solicitacao de cartão.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartaoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro ao autorizar acesso.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartaoResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Numero máximo de cartões atigindo.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao cadastrar cartão.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cartao/{numeroCartao}": {
+      "get": {
+        "tags": [
+          "cartao-controller"
+        ],
+        "operationId": "buscarPorId",
+        "parameters": [
+          {
+            "name": "numeroCartao",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartaoResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "CartaoRequest": {
+        "required": [
+          "cpf",
+          "limite"
+        ],
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          },
+          "limite": {
+            "type": "number"
+          },
+          "numero": {
+            "pattern": "^[0-9]{16}",
+            "type": "string"
+          },
+          "data_validade": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cvv": {
+            "pattern": "^[0-9]{3}",
+            "type": "string"
+          }
+        }
+      },
+      "CartaoResponse": {
+        "type": "object",
+        "properties": {
+          "cartaoId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "limite": {
+            "type": "number"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "data_validade": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cvv": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

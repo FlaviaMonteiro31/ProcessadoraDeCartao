@@ -1,0 +1,333 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8083",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/pagamentos": {
+      "post": {
+        "tags": [
+          "pagamento-controller"
+        ],
+        "description": "Realiza o cadastro do pagamento",
+        "operationId": "registraPagamento",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PagamentoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Sucesso ao cadastrar pagamento.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagamentoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro ao autorizar acesso.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagamentoResponse"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Erro ao efetuar o pagamento. Limite do cartão excedido!",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao realizar pagamento",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pagamentos/cliente/{cpf}": {
+      "get": {
+        "tags": [
+          "pagamento-controller"
+        ],
+        "description": "Consulta status do pagamento.",
+        "operationId": "listaPorId",
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagina",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "tamanho",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna status do pagamento",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageStatusPagamentoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Erro ao autorizar acesso.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageStatusPagamentoResponse"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro ao realizar pagamento",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "PagamentoRequest": {
+        "required": [
+          "cpf"
+        ],
+        "type": "object",
+        "properties": {
+          "cpf": {
+            "type": "string"
+          },
+          "numero": {
+            "pattern": "^[0-9]{16}",
+            "type": "string"
+          },
+          "data_validade": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cvv": {
+            "pattern": "^[0-9]{3}",
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          }
+        }
+      },
+      "PagamentoResponse": {
+        "type": "object",
+        "properties": {
+          "chave_pagamento": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "data_validade": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cvv": {
+            "type": "string"
+          },
+          "valor": {
+            "type": "number"
+          }
+        }
+      },
+      "PageStatusPagamentoResponse": {
+        "type": "object",
+        "properties": {
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StatusPagamentoResponse"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "pageable": {
+            "$ref": "#/components/schemas/PageableObject"
+          },
+          "numberOfElements": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PageableObject": {
+        "type": "object",
+        "properties": {
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/SortObject"
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unpaged": {
+            "type": "boolean"
+          },
+          "paged": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SortObject": {
+        "type": "object",
+        "properties": {
+          "empty": {
+            "type": "boolean"
+          },
+          "sorted": {
+            "type": "boolean"
+          },
+          "unsorted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StatusPagamentoResponse": {
+        "type": "object",
+        "properties": {
+          "valor": {
+            "type": "number"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "metodo_pagamento": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
