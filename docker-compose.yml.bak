@@ -1,0 +1,137 @@
+version: '3.8'
+
+services:
+  ms-postgres:
+    image: postgres:latest
+    container_name: ms-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ms_clientes,ms_cartao,ms_pagamentos,ms_autenticacao
+    command: >
+      bash -c '
+        echo "CREATE DATABASE ms_clientes;" >> /docker-entrypoint-initdb.d/init.sql &&
+        echo "CREATE DATABASE ms_cartao;" >> /docker-entrypoint-initdb.d/init.sql &&
+        echo "CREATE DATABASE ms_pagamentos;" >> /docker-entrypoint-initdb.d/init.sql &&
+        echo "CREATE DATABASE ms_autenticacao;" >> /docker-entrypoint-initdb.d/init.sql &&
+        docker-entrypoint.sh postgres
+      ' 
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+
+  clientes:
+    container_name: ms_clientes
+    build:
+      context: ./ms_clientes
+      dockerfile: Dockerfile
+    environment:
+      PG_HOST: jdbc:postgresql://ms-postgres:5432/ms_clientes
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      API_SECRET: FIAP2024
+      MS_USUARIO_URL: http://autenticacao:8084/api/autenticacao
+    depends_on:
+      - ms-postgres
+    ports:
+      - "8081:8081"
+    networks:
+      - my-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  autenticacao:
+    container_name: ms_autenticacao
+    build:
+      context: ./ms_autenticacao
+      dockerfile: Dockerfile
+    environment:
+      PG_HOST: jdbc:postgresql://ms-postgres:5432/ms_autenticacao
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      API_SECRET: FIAP2024
+      MS_CLIENTES_URL: http://clientes:8081/api/cliente
+    depends_on:
+      - ms-postgres
+    ports:
+      - "8084:8084"
+    networks:
+      - my-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  cartao:
+    container_name: ms_cartao
+    build:
+      context: ./ms_cartao
+      dockerfile: Dockerfile
+    environment:
+      PG_HOST: jdbc:postgresql://ms-postgres:5432/ms_cartao
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      API_SECRET: FIAP2024
+      MS_CLIENTES_URL: http://clientes:8081/api/cliente
+      MS_USUARIO_URL: http://autenticacao:8084/api/autenticacao
+    depends_on:
+      - ms-postgres
+    ports:
+      - "8082:8082"
+    networks:
+      - my-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  pagamentos:
+    container_name: ms_pagamentos
+    build:
+      context: ./ms_pagamentos
+      dockerfile: Dockerfile
+    environment:
+      PG_HOST: jdbc:postgresql://ms-postgres:5432/ms_pagamentos
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+      API_SECRET: FIAP2024
+      MS_CARTAO_URL: http://cartao:8082/api/cartao
+      MS_USUARIO_URL: http://autenticacao:8084/api/autenticacao
+    depends_on:
+      - ms-postgres
+    ports:
+      - "8083:8083"
+    networks:
+      - my-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    environment:
+      HOST_CLIENTES: http://clientes:8081/api/cliente
+      HOST_CARTAO: http://cartao:8082/api/cartao
+      HOST_PAGAMENTOS: http://pagamentos:8083/api/pagamentos
+      HOST_AUTENTICACAO: http://autenticacao:8084/api/autenticacao
+    depends_on:
+      - ms-postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+networks:
+  my-network:
+    driver: bridge
