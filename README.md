@@ -67,7 +67,7 @@ Os microserviços foram definidos com 512 de memória no docker.
 		   "pais":"Brasil"
 		}*
 	
- 3. Gerar cartão de crédito para o cliente informando os dados e o limite para o cartão de crédito *****(Está API possui uma tolerância para expiração do token de 2 minutos após a geração do token )*****:
+ 3. Gerar cartão de crédito para o cliente informando os dados e o limite para o cartão de crédito *****(Está API possui uma tolerância para expiração de 2 minutos após a geração do token )*****:
 	     *POST: http://localhost:8080/api/cartao
 	     { 
 		"cpf":"016.557.900-56", 
@@ -81,13 +81,17 @@ Os microserviços foram definidos com 512 de memória no docker.
 	 *POST: http://localhost:8080/api/pagamentos
 		 {
 		   "cpf":"016.557.900-56",
-		   "numero":"1234123412341237", 
+    
+		   "numero":"1234123412341237",
+    
 		   "data_validade":"12/24",
+    
 		   "cvv":"123",
+    
 		   "valor":500.00
 		}*
 	
- 5. Consultar o status do pagamento:
+ 6. Consultar o status do pagamento:
 	  *GET: http://localhost:8080/api/pagamentos/cliente/016.557.900-56*
 
 
