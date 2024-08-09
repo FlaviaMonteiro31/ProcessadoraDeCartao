@@ -56,7 +56,7 @@ Os microserviços foram definidos com 512 de memória no docker.
     
 	  "senha": "adj@1234"
     
-         }*
+	}*
 
  2. Realizar o cadastro de cliente:
     
