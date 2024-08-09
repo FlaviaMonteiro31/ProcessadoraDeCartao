@@ -43,7 +43,7 @@ https://github.com/FlaviaMonteiro31/ProcessadoraDeCartao.git
 
 ## Fluxo de trabalho
 
-Este sessão visa explanar o fluxo principal de usabilidade dos microserviços.
+Esta sessão visa explanar o fluxo principal de usabilidade dos microserviços.
 Os microserviços foram definidos com 512 de memória no docker. 
 
  1. Solicitar token de acesso usando usuário e senha:
